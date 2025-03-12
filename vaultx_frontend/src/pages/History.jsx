@@ -66,16 +66,16 @@ export default function History() {
               <tr key={index}>
                 <td>
                   <a
-                    href={`https://etherscan.io/tx/${tx.hash}`}
+                    href={`https://sepolia.etherscan.io/tx/${tx.hash}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {tx.hash.substring(0, 8)}...
                   </a>
                 </td>
-                <td>{tx.from.substring(0, 8)}...</td>
+                <td>{tx.from.substring(0,8)}...</td>
                 <td>{tx.to.substring(0, 8)}...</td>
-                <td>{tx.value}</td>
+                <td>{parseFloat(tx.value).toFixed(4)}</td>
                 <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td>
               </tr>
             ))}

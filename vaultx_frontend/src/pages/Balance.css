@@ -1,0 +1,84 @@
+.home-container {
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 32px;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .home-container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M75 14L106.25 64.5L75 87L43.75 64.5L75 14Z' stroke='%230ea5e9' stroke-width='2' stroke-opacity='0.2'/%3E%3Cpath d='M75 87L106.25 64.5L75 136L43.75 64.5L75 87Z' stroke='%236b21a8' stroke-width='2' stroke-opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.15;
+  }
+  
+  .home-container h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  
+  .home-container h1:before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 2L23 14.5L16 19L9 14.5L16 2Z' fill='%230ea5e9' fill-opacity='0.5'/%3E%3Cpath d='M16 19L23 14.5L16 30L9 14.5L16 19Z' fill='%236b21a8' fill-opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+  }
+  
+  .balance-card {
+    background: linear-gradient(135deg, rgba(107, 33, 168, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .balance-card p {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    color: var(--text-primary);
+  }
+  
+  .balance-value {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+  }
+  
+  /* Customizations for balance display */
+  .home-container p {
+    background: linear-gradient(135deg, rgba(107, 33, 168, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    margin-top: 16px;
+  }
