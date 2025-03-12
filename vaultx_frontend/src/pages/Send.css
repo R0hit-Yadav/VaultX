@@ -1,0 +1,111 @@
+.send-container {
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 32px;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    position: relative;
+  }
+  
+  .send-container:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 30L90 45V75L60 90L30 75V45L60 30Z' stroke='%236b21a8' stroke-width='2' stroke-opacity='0.2'/%3E%3Cpath d='M60 60L90 45L60 30L30 45L60 60Z' stroke='%230ea5e9' stroke-width='2' stroke-opacity='0.2'/%3E%3Cpath d='M60 60V90' stroke='%236b21a8' stroke-width='2' stroke-opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.2;
+  }
+  
+  .send-container h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  
+  .send-container h1:before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 5L26 14L14 23L2 14L14 5Z' fill='%236b21a8' fill-opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+  }
+  
+  .send-container input[type="text"] {
+    margin-bottom: 16px;
+  }
+  
+  .amount-input-wrapper {
+    position: relative;
+  }
+  
+  .amount-input-wrapper::after {
+    content: 'ETH';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .send-container button {
+    margin-top: 8px;
+  }
+  
+  .send-container p {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(107, 33, 168, 0.1);
+    border-left: 4px solid var(--primary-color);
+    font-size: 14px;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+  
+  .send-container p.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid var(--success-color);
+  }
+  
+  .send-container p.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid var(--error-color);
+  }
+  
+  /* Transaction gas info */
+  .gas-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(51, 65, 85, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .gas-info span {
+    color: var(--secondary-color);
+    font-weight: 500;
+  }
+  
+  /* Custom styles for the ETH symbol */
+  .eth-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+  }

@@ -1,0 +1,185 @@
+.history-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 32px;
+    background-color: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .history-container:before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 150px;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3Csvg width='150' height='150' viewBox='0 0 150 150' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M75 25L125 50V100L75 125L25 100V50L75 25Z' stroke='%230ea5e9' stroke-width='2' stroke-opacity='0.1'/%3E%3Cpath d='M75 50L125 75V125L75 150L25 125V75L75 50Z' stroke='%236b21a8' stroke-width='2' stroke-opacity='0.1'/%3E%3Cpath d='M75 0L125 25V75L75 100L25 75V25L75 0Z' stroke='%230ea5e9' stroke-width='2' stroke-opacity='0.1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    z-index: 0;
+    opacity: 0.15;
+  }
+  
+  .history-container h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  
+  .history-container h1:before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='14' cy='14' r='12' stroke='%230ea5e9' stroke-width='2' stroke-opacity='0.5'/%3E%3Cpath d='M14 8V14L18 16' stroke='%236b21a8' stroke-width='2' stroke-opacity='0.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+  }
+  
+  .history-input {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .history-input input {
+    flex-grow: 1;
+    margin: 0;
+  }
+  
+  .history-input button {
+    width: auto;
+    flex-shrink: 0;
+    flex-basis: 150px;
+    margin: 0;
+  }
+  
+  .history-input button:disabled {
+    background-color: #4b5563;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  .error {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid var(--error-color);
+    color: var(--text-primary);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .history-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .history-table th,
+  .history-table td {
+    text-align: left;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .history-table th {
+    background-color: rgba(51, 65, 85, 0.5);
+    color: var(--secondary-color);
+    font-weight: 600;
+    position: relative;
+  }
+  
+  .history-table th:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  }
+  
+  .history-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .history-table tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .history-table tbody tr:hover {
+    background-color: rgba(51, 65, 85, 0.3);
+  }
+  
+  .history-table a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .history-table a:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+  }
+  
+  /* Loading indicator */
+  .history-container button:disabled {
+    position: relative;
+  }
+  
+  .history-container button:disabled:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--text-primary);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: translateY(-50%) rotate(360deg);
+    }
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .history-container {
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+    }
+    
+    .history-input {
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .history-input button {
+      width: 100%;
+    }
+    
+    .history-table {
+      display: block;
+      overflow-x: auto;
+    }
+    
+    .history-table th,
+    .history-table td {
+      padding: 12px 8px;
+      font-size: 14px;
+    }
+  }
