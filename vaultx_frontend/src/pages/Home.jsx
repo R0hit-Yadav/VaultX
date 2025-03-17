@@ -1,7 +1,163 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./Home.css";
 
 export default function Home() {
+
+  useEffect(() => {
+    // Initialize particles
+    createParticles();
+
+    // Reveal animations on scroll
+    const scrollElements = document.querySelectorAll(".reveal");
+    const elementInView = (el, dividend = 1) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend;
+    };
+
+    const displayScrollElement = (element) => {
+      element.classList.add("active");
+    };
+
+    const hideScrollElement = (element) => {
+      element.classList.remove("active");
+    };
+
+    const handleScrollAnimation = () => {
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 1.25)) {
+          displayScrollElement(el);
+        } else {
+          hideScrollElement(el);
+        }
+      });
+    };
+
+    // Initialize scroll animation
+    handleScrollAnimation();
+
+    // Add scroll event listener
+    window.addEventListener("scroll", () => {
+      handleScrollAnimation();
+
+      // Show/hide scroll-top button
+      const scrollButton = document.querySelector(".scroll-top");
+      if (window.scrollY > 500) {
+        scrollButton.classList.add("visible");
+      } else {
+        scrollButton.classList.remove("visible");
+      }
+    });
+
+    // Scroll to top button
+    const scrollTopButton = document.querySelector(".scroll-top");
+    if (scrollTopButton) {
+      scrollTopButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    }
+
+    // Add visible class to feature cards
+    const featureCards = document.querySelectorAll(".feature-card");
+    setTimeout(() => {
+      featureCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add("visible");
+        }, 100 * index);
+      });
+    }, 500);
+
+    // Add visible class to stat items
+    const statItems = document.querySelectorAll(".stat-item");
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statItems.forEach((item) => {
+      statObserver.observe(item);
+    });
+
+    // Add visible class to CTA section
+    const ctaContent = document.querySelector(".cta-content");
+    const ctaObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (ctaContent) {
+      ctaObserver.observe(ctaContent);
+    }
+
+    // Create particles
+    function createParticles() {
+      const particlesContainer = document.querySelector(".particles-container");
+      if (!particlesContainer) return;
+
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+
+        // Random position
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+
+        // Random size
+        const size = Math.random() * 5 + 1;
+
+        // Random speed
+        const speedX = Math.random() * 0.5 - 0.25;
+        const speedY = Math.random() * 0.5 - 0.25;
+
+        // Random opacity
+        const opacity = Math.random() * 0.5 + 0.1;
+
+        // Apply styles
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.opacity = opacity;
+
+        // Add to container
+        particlesContainer.appendChild(particle);
+
+        // Animate particle
+        animateParticle(particle, posX, posY, speedX, speedY);
+      }
+    }
+
+    function animateParticle(particle, posX, posY, speedX, speedY) {
+      let x = posX;
+      let y = posY;
+
+      const animate = () => {
+        x += speedX;
+        y += speedY;
+
+        // Boundary check
+        if (x < 0 || x > 100) speedX *= -1;
+        if (y < 0 || y > 100) speedY *= -1;
+
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+
+        requestAnimationFrame(animate);
+      };
+
+      animate();
+    }
+  }, []);
   return (
     <div className="app-container">
     <div className="main-content">

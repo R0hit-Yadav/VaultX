@@ -1,4 +1,4 @@
-use warp::{Filter, ws::{Message, WebSocket}, Rejection, Reply};
+use warp::Filter;
 use ethers::prelude::*;
 use tokio;
 use std::sync::Arc;
@@ -6,9 +6,6 @@ use serde::{Deserialize, Serialize};
 use std::env;
 use dotenv::dotenv;
 use reqwest;
-use tokio::sync::mpsc;
-use futures_util::sink::SinkExt;
-use tokio::task;
 
 #[derive(Debug, Deserialize)]
 struct SendTxRequest {
@@ -48,7 +45,6 @@ async fn main() {
     dotenv().ok();
     let infura_api_key = env::var("INFURA_API_KEY").expect("INFURA_API_KEY not set");
     let private_key = env::var("PRIVATE_KEY").expect("PRIVATE_KEY not set");
-    let etherscan_api_key = env::var("ETHERSCAN_API_KEY").expect("ETHERSCAN_API_KEY not set");
 
     let provider = Provider::<Http>::try_from(format!("https://sepolia.infura.io/v3/{}", infura_api_key)).expect("Could not connect to provider");
     let wallet = private_key.parse::<LocalWallet>().unwrap().with_chain_id(1u64);
@@ -74,14 +70,9 @@ async fn main() {
     .and_then(get_transaction_history)
     .with(warp::cors().allow_any_origin());
 
-    let walletconnect_route = warp::path("walletconnect")
-        .and(warp::ws())
-        .map(|ws: warp::ws::Ws| ws.on_upgrade(walletconnect_handler));
-
     let routes = balance_route
     .or(send_tx_route)
     .or(history_tx_routes)
-    .or(walletconnect_route)
     .with(cors);
 
     println!("Server running on http://localhost:3030");
@@ -145,25 +136,6 @@ async fn get_transaction_history(address: String) -> Result<impl warp::Reply, wa
     }
 }
 
-
-async fn walletconnect_handler(ws: WebSocket) {
-    let (mut sender, mut receiver) = ws.split();
-    
-    while let Some(Ok(msg)) = receiver.next().await {
-        if let Ok(text) = msg.to_str() {
-            if let Ok(request) = serde_json::from_str::<WalletConnectRequest>(text) {
-                println!("Received WalletConnect request: {:?}", request);
-
-                let response = serde_json::json!({
-                    "status": "success",
-                    "message": "WalletConnect request received"
-                });
-
-                let _ = sender.send(Message::text(response.to_string())).await;
-            }
-        }
-    }
-}
 
 
 

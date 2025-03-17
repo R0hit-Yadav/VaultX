@@ -12,6 +12,6 @@ export default defineConfig({
     hmr: {
       clientPort: 443, // Required for Ngrok HTTPS
     },
-    allowedHosts: ["5490-27-109-9-122.ngrok-free.app"], // Add your Ngrok URL here
+    allowedHosts: ["7099-2402-a00-404-24e9-a9ef-5d2f-f3f-761a.ngrok-free.app"], // Add your Ngrok URL here
   },
 })

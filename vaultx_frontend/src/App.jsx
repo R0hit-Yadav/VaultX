@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import Send from "./pages/Send";
 import History from "./pages/History";
 import Balance from "./pages/Balance";
-// import WalletConnectPage from "./pages/WalletConnect";
 import "./App.css";
 
 export default function App() {
@@ -16,7 +15,6 @@ export default function App() {
         <Route path="/send" element={<Send />} />
         <Route path="/history" element={<History />} />
         <Route path="/balance" element={<Balance />} />
-        {/* <Route path="/dapp" element={<WalletConnectPage />} /> */}
       </Routes>
     </Router>
   );
