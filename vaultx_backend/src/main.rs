@@ -103,10 +103,23 @@ async fn send_transaction(body: SendTxRequest, client: Arc<SignerMiddleware<Prov
 
     match client.send_transaction(tx, None).await {
         Ok(pending_tx) => {
-            let tx_hash = pending_tx.tx_hash();
-            Ok(warp::reply::json(&serde_json::json!({ "tx_hash": format!("{:?}", tx_hash) })))
+            let receipt = pending_tx.await.expect("Transaction failed");
+
+            let receipt = receipt.unwrap();
+            let tx_details = serde_json::json!({
+                "tx_hash": format!("{:?}", receipt.transaction_hash),
+                "from": format!("{:?}", receipt.from),
+                "to": format!("{:?}", receipt.to.unwrap_or_default()), // Handle possible None value
+                "value": format!("{}", ethers::utils::format_ether(amount)),
+                "gas_used": format!("{:?}", receipt.gas_used.unwrap_or_default()),
+                "gas_price": format!("{:?}", receipt.effective_gas_price.unwrap_or_default()),
+                "block_number": format!("{:?}", receipt.block_number.unwrap_or_default()),
+                "status": if receipt.status.unwrap_or_default().as_u64() == 1 { "Success" } else { "Failed" }
+            });
+
+            Ok(warp::reply::json(&tx_details))
         },
-        Err(e) => Ok(warp::reply::json(&serde_json::json!({ "error": format!("{}", e) }))),
+        Err(e) => Ok(warp::reply::json(&serde_json::json!({ "error": format!("{}", e) })) ),
     }
 }
 

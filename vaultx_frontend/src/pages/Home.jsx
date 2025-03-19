@@ -164,7 +164,7 @@ export default function Home() {
     <div className="hero-card">
       <div className="hero-text">
         <h1>
-          <span className="gradient-text">Vault</span>
+          <span className="gradient-text">VaultX</span>
           <br />
           <span className="gradient-text">Wallet</span>
         </h1>
