@@ -116,7 +116,7 @@ async fn send_transaction(body: SendTxRequest, client: Arc<SignerMiddleware<Prov
                 "block_number": format!("{:?}", receipt.block_number.unwrap_or_default()),
                 "status": if receipt.status.unwrap_or_default().as_u64() == 1 { "Success" } else { "Failed" }
             });
-
+            println!("Transaction sent: {:?}", tx_details);
             Ok(warp::reply::json(&tx_details))
         },
         Err(e) => Ok(warp::reply::json(&serde_json::json!({ "error": format!("{}", e) })) ),
